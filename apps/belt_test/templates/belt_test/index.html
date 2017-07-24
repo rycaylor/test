@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Welcome, {{user.first_name}}</h1>
+    <a href="{% url 'login:logout' %}">Logout</a>
+
+    {% if messages %}
+    {% for message in messages %}
+    <h3 style="color:red">{{message}}</h3>
+    {% endfor %}
+    {% endif %}
+
+    <h2>Our Awesome Cats!</h2>
+    <a href="{% url 'belt:add' %}">Add An Awesome Cat!</a>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Likes</th>
+      </tr>
+
+
+
+    {% for cat in cats %}
+    <tr>
+        <td><a href="{% url 'belt:info' id=cat.id %}">{{cat.name}}</a></td>
+        <td>{{cat.age}}</td>
+        <td>{{cat.cat_like.count}}</td>
+          {% if request.session.logged != cat.user_id %}
+          {% if request.session.logged in cat.get_like_users %}
+          <td><a href="{% url 'belt:unlike' id=cat.id %}" value="{{cat.id}}">Unlike</a></td>
+          <td>you liked this</td>
+          {% else %}
+          <td><a href="{% url 'belt:like' id=cat.id %}" value="{{cat.id}}">Like</a></td>
+          {% endif %}
+            {% endif %}
+        {% if request.session.logged == cat.user_id %}
+        <td><a href="{% url 'belt:delete' id=cat.id %}">delete</a></td>
+        <td><a href="{% url 'belt:edit' id=cat.id %}">edit</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+
+
+
+
+
+  </body>
+</html>

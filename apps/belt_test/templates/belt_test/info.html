@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Cat page!</h1>
+    <a href="{% url 'belt:index' %}">Home</a>
+
+    <h3>Name:</h3>
+    <h2>{{cat.name}}</h2>
+
+    <h3>Age:</h3>
+    <h2>{{cat.age}}</h2>
+
+
+    <h3>Likes:</h3>
+    <h2>{{cat.cat_like.count}}</h2>
+  </body>
+</html>

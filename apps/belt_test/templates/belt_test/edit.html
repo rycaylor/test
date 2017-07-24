@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    {% if messages %}
+    {% for message in messages %}
+    <h3 style="color:red">{{message}}</h3>
+    {% endfor %}
+    {% endif %}
+
+    <h1>Cat Edit!</h1>
+    <a href="{% url 'belt:index' %}">I changeed my mind take me home</a>
+    <h1>Current Cat Stats</h1>
+
+    <h2>Name: {{cat.name}}</h2>
+
+    <h2>Age: {{cat.age}}</h2>
+
+    <form class="" action="{% url 'belt:change' %}" method="post">
+      {% csrf_token %}
+      <h3>New Name</h3>
+      <input type="text" name="name" value="">
+
+      <h3>New Age</h3>
+      <input type="number" name="age" value="">
+      <input type="hidden" name="cat" value="{{cat.id}}">
+      <input type="submit" name="" value="Edit Cat!">
+
+    </form>
+
+  </body>
+</html>
